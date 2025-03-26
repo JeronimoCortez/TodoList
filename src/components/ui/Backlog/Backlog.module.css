@@ -1,0 +1,27 @@
+.containerBacklog {
+  width: 80vw;
+  margin: .8rem;
+}
+
+.title {
+  color: #000;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.buttonTask {
+  all: unset;
+  background-color: #74A3D3;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10rem;
+  display: flex;
+  gap: 5px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonTask:hover {
+  cursor: pointer;
+}

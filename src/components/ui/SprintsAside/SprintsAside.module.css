@@ -1,0 +1,55 @@
+.containerAside {
+  margin: .8rem;
+  background-color: #74A3D3;
+  height: 80vh;
+  padding: .4rem;
+  border-radius: 2rem;
+  width: 15vw;
+}
+
+.buttonBacklog {
+  all: unset;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid rgba(116, 163, 211, .5);
+  padding: .6rem;
+  border-radius: 10rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  font-weight: bold;
+}
+
+.buttonBacklog:hover {
+  cursor: pointer;
+}
+
+.containerTitleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: .8rem;
+}
+
+.title {
+  color: #fff;
+  font-weight: 200;
+}
+
+.buttonAddSprint {
+  all: unset;
+}
+
+.buttonAddSprint:hover {
+  cursor: pointer;
+}
+
+.line {
+  width: 80%;
+  border: 1px solid #fff;
+  margin: 2px auto;
+}

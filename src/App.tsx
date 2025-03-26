@@ -1,9 +1,8 @@
-import Header from "./components/ui/Header/Header";
-
+import BacklogScreen from "./components/screens/BacklogScreen/BacklogScreen";
 function App() {
   return (
     <>
-      <Header />
+      <BacklogScreen />
     </>
   );
 }
