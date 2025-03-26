@@ -1,6 +1,6 @@
 .containerBacklog {
   width: 80vw;
-  margin: .8rem;
+  margin: 0.8rem;
 }
 
 .title {
@@ -11,7 +11,7 @@
 
 .buttonTask {
   all: unset;
-  background-color: #74A3D3;
+  background-color: #74a3d3;
   color: #fff;
   padding: 1rem;
   border-radius: 10rem;

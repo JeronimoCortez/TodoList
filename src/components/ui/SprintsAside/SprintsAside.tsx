@@ -1,3 +1,4 @@
+import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
 
 const SprintsAside = () => {
@@ -16,6 +17,10 @@ const SprintsAside = () => {
       </div>
 
       <div className={styles.line}></div>
+
+      <div className={styles.sprintCardContainer}>
+        <SprintCard />
+      </div>
     </div>
   );
 };

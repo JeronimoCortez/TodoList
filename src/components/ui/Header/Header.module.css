@@ -1,12 +1,13 @@
 .containerHeader {
-  background-color: #74A3D3;
-  margin: .8rem;
+  background-color: #74a3d3;
+  margin: 0.8rem;
   border-radius: 10rem;
-  padding: .4rem;
+  padding: 0.4rem;
 }
 
 .title {
-  color: #FFF;
-  font-size: 32px;
+  color: #fff;
+  font-size: 28px;
   font-weight: bold;
+  margin-left: 1rem;
 }
