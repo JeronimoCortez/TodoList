@@ -1,7 +1,14 @@
+import { ISprint } from "../../../types/ISprint";
 import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
 
 const SprintsAside = () => {
+  const sprint: ISprint = {
+    nombre: "Sprint 1",
+    inicio: new Date("2025-03-26"),
+    fin: new Date("2025-03-31"),
+  };
+
   return (
     <div className={styles.containerAside}>
       <button className={styles.buttonBacklog}>
@@ -11,7 +18,7 @@ const SprintsAside = () => {
         <h3 className={styles.title}>
           Lista de sprints
           <button className={styles.buttonAddSprint}>
-            <img src="./add.svg" alt="" />
+            <img className={styles.addIcon} src="./add.svg" alt="" />
           </button>
         </h3>
       </div>
@@ -19,7 +26,7 @@ const SprintsAside = () => {
       <div className={styles.line}></div>
 
       <div className={styles.sprintCardContainer}>
-        <SprintCard />
+        <SprintCard sprint={sprint} />
       </div>
     </div>
   );

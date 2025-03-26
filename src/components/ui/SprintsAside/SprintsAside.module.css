@@ -29,6 +29,7 @@
 }
 
 .containerTitleButton {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,11 +44,13 @@
 
 .buttonAddSprint {
   all: unset;
+  position: absolute;
 }
 
 .buttonAddSprint:hover {
   cursor: pointer;
 }
+
 
 .line {
   width: 80%;
