@@ -6,22 +6,12 @@ import SprintsAside from "../../ui/SprintsAside/SprintsAside";
 import styles from "./BacklogScreen.module.css";
 
 const BacklogScreen = () => {
-  const tareaEjemplo: ITarea = {
-    titulo: "aaa",
-    descripcion: "bbb",
-    fechaLimite: new Date(),
-  };
   return (
     <>
       <Header />
       <div className={styles.container}>
         <SprintsAside />
-        <div className={styles.Backlog}>
-          <Backlog />
-        </div>
-        <div className={styles.listTareas}>
-          <ListTareas tarea={tareaEjemplo} />
-        </div>
+        <Backlog />
       </div>
     </>
   );

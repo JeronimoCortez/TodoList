@@ -1,10 +1,24 @@
 .tarea {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   background: rgba(116, 163, 211, 0.5);
   padding: 10px;
   border-radius: 10rem;
   gap: 10px;
+  margin-top: 1rem;
+}
+
+.containerData {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.containerButton {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
 }
 
 .titulo,
