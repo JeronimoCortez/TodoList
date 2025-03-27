@@ -1,5 +1,10 @@
+import BacklogScreen from "./components/screens/BacklogScreen/BacklogScreen";
 function App() {
-  return <></>;
+  return (
+    <>
+      <BacklogScreen />
+    </>
+  );
 }
 
 export default App;

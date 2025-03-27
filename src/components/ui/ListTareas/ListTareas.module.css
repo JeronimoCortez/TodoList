@@ -1,0 +1,56 @@
+.tarea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(116, 163, 211, 0.5);
+  padding: 10px;
+  border-radius: 10rem;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.containerData {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.containerButton {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.titulo,
+.descripcion,
+.fecha {
+  font-size: 14px;
+}
+
+.enviar {
+  background: rgb(87, 96, 122, 0.6);
+  color: white;
+  justify-content: space-between;
+  border: 1px solid rgb(87, 96, 122, 0.5);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  padding: 10px;
+  border-radius: 10rem;
+  border: 1px solid rgb(0, 0, 0, 0.5);
+}
+
+.acciones {
+  display: flex;
+  gap: 5px;
+}

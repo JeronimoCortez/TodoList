@@ -1,0 +1,59 @@
+.containerAside {
+  margin: 0.8rem;
+  background-color: #74a3d3;
+  height: 80vh;
+  padding: 0.4rem;
+  border-radius: 2rem;
+  width: 15vw;
+}
+
+.buttonBacklog {
+  all: unset;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid rgba(116, 163, 211, 0.5);
+  padding: 0.6rem;
+  border-radius: 10rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  font-weight: bold;
+  margin-top: 0.8rem;
+}
+
+.buttonBacklog:hover {
+  cursor: pointer;
+}
+
+.containerTitleButton {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 0.8rem;
+}
+
+.title {
+  color: #fff;
+  font-weight: 200;
+}
+
+.buttonAddSprint {
+  all: unset;
+  position: absolute;
+}
+
+.buttonAddSprint:hover {
+  cursor: pointer;
+}
+
+
+.line {
+  width: 80%;
+  border: 1px solid #fff;
+  margin: 2px auto;
+}

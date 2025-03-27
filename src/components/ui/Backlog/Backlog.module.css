@@ -1,0 +1,36 @@
+.containerBacklog {
+  width: 80vw;
+  margin: 0.8rem;
+  background-image: url("./bgTptodoList.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  width: 100%;
+  border-radius: 2rem;
+  padding: 0.4rem;
+}
+
+.title {
+  color: #000;
+  font-size: 40px;
+  font-weight: bold;
+  margin: .4rem .8rem;
+}
+
+.buttonTask {
+  all: unset;
+  background-color: #74a3d3;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 10rem;
+  display: flex;
+  gap: 5px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonTask:hover {
+  cursor: pointer;
+}
