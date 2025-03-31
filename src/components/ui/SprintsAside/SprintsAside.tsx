@@ -7,6 +7,7 @@ const SprintsAside = () => {
     nombre: "Sprint 1",
     inicio: new Date("2025-03-26"),
     fin: new Date("2025-03-31"),
+    tasks: [],
   };
 
   return (
