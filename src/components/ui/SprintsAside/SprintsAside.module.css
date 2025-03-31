@@ -3,7 +3,7 @@
   background-color: #74a3d3;
   height: 80vh;
   padding: 0.4rem;
-  border-radius: 2rem;
+  border-radius: 5px;
   width: 15vw;
 }
 
@@ -13,7 +13,7 @@
   color: #000;
   border: 2px solid rgba(116, 163, 211, 0.5);
   padding: 0.6rem;
-  border-radius: 10rem;
+  border-radius: 5rem;
   display: flex;
   gap: 1rem;
   justify-content: center;
