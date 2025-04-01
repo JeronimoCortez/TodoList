@@ -1,5 +1,6 @@
 import { ITarea } from "../../../types/ITarea";
 import ListTareas from "../ListTareas/ListTareas";
+import TaskCard from "../TaskCard/TaskCard";
 import styles from "./Backlog.module.css";
 
 const Backlog = () => {
@@ -17,6 +18,7 @@ const Backlog = () => {
       </button>
 
       <ListTareas tarea={tareaEjemplo} />
+      <TaskCard tarea={tareaEjemplo} />
     </div>
   );
 };
