@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { ISprint } from "../../../types/ISprint";
 import styles from "./Sprint.module.css";
+import TaskCard from "../TaskCard/TaskCard";
 
 type IPropsSprint = {
   sprint: ISprint;
@@ -19,6 +20,9 @@ const Sprint: FC<IPropsSprint> = (sprint) => {
       <div className={styles.containerTasks}>
         <div className={styles.tasks}>
           <h4 className={styles.titleTask}>Pendiente</h4>
+          <TaskCard
+            tarea={{ titulo: "", descripcion: "", fechaLimite: new Date() }}
+          />
         </div>
         <div className={styles.tasks}>
           <h4 className={styles.titleTask}>En progreso</h4>
