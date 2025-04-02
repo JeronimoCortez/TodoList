@@ -1,0 +1,13 @@
+.openButton {
+  display: flex;
+  border: 4px solid #5bcaa4;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.openButton:hover {
+  cursor: pointer;
+}
