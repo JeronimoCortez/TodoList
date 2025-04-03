@@ -18,7 +18,6 @@ const Backlog = () => {
       </button>
 
       <ListTareas tarea={tareaEjemplo} />
-      <TaskCard tarea={tareaEjemplo} />
     </div>
   );
 };
