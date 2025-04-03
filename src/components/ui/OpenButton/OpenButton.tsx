@@ -1,10 +1,15 @@
+import { FC } from "react";
 import styles from "./OpenButton.module.css";
 
-const OpenButton = () => {
+type IOpenButton = {
+  onClick?: VoidFunction;
+};
+
+const OpenButton: FC<IOpenButton> = ({ onClick }) => {
   return (
-    <div className={styles.openButton}>
+    <button onClick={onClick} className={styles.openButton}>
       <img src="./check.svg" alt="" />
-    </div>
+    </button>
   );
 };
 

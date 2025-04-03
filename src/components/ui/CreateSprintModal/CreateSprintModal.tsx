@@ -3,6 +3,7 @@ import { ISprint } from "../../../types/ISprint";
 import styles from "./CreateSprintModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
 import OpenButton from "../OpenButton/OpenButton";
+import { createSprintController } from "../../../data/todoListController";
 
 interface IPropsCreateSprint {
   id?: string;
@@ -20,7 +21,12 @@ export const CreateSprintModal: FC<IPropsCreateSprint> = () => {
     tasks: [],
   };
 
-  const [sprint] = useState<ISprint>(initialValues);
+  const [sprint, setSprint] = useState<ISprint>(initialValues);
+
+  const createSprint = async () => {
+    setSprint({ ...sprint, id: new Date().toISOString() });
+    await createSprintController(sprint);
+  };
 
   return (
     <div className={styles.containerCreateSprintModal}>
@@ -30,27 +36,29 @@ export const CreateSprintModal: FC<IPropsCreateSprint> = () => {
           type="text"
           placeholder="Nombre"
           value={sprint.nombre}
-          //onChange={}
+          onChange={(e) => setSprint({ ...sprint, nombre: e.target.value })}
           className={styles.nombreSprint}
         />
         <input
           type="date"
           placeholder="Fecha inicio"
           value={sprint.inicio.toISOString().split("T")[0]}
-          //onChange={}
+          onChange={(e) =>
+            setSprint({ ...sprint, inicio: new Date(e.target.value) })
+          }
           className={styles.inicioSprint}
         />
         <input
           type="date"
           placeholder="Fecha fin"
           value={sprint.fin.toISOString().split("T")[0]}
-          //onChange={}
+          onChange={(e) =>
+            setSprint({ ...sprint, fin: new Date(e.target.value) })
+          }
           className={styles.finSprint}
         />
         <div className={styles.buttons}>
-          <OpenButton
-          //onClick={}
-          />
+          <OpenButton onClick={createSprint} />
           <CloseButton
           //onClick={}
           />
