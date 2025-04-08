@@ -1,6 +1,6 @@
-import styles from "./OpenButton.module.css";
+import styles from "./AcceptButton.module.css";
 
-const OpenButton = () => {
+const AcceptButton = () => {
   return (
     <div className={styles.openButton}>
       <img src="./check.svg" alt="" />
@@ -8,4 +8,4 @@ const OpenButton = () => {
   );
 };
 
-export default OpenButton;
+export default AcceptButton;

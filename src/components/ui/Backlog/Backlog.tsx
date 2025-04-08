@@ -1,6 +1,5 @@
 import { ITarea } from "../../../types/ITarea";
 import ListTareas from "../ListTareas/ListTareas";
-import TaskCard from "../TaskCard/TaskCard";
 import styles from "./Backlog.module.css";
 
 const Backlog = () => {
@@ -16,7 +15,6 @@ const Backlog = () => {
       <button className={styles.buttonTask}>
         Crear nueva tarea <img src="./list.svg" alt="" />
       </button>
-
       <ListTareas tarea={tareaEjemplo} />
     </div>
   );

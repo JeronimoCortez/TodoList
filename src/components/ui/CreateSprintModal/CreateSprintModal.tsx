@@ -1,61 +1,86 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ISprint } from "../../../types/ISprint";
 import styles from "./CreateSprintModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
-import OpenButton from "../OpenButton/OpenButton";
+import AcceptButton from "../AcceptButton/AcceptButton";
 
 interface IPropsCreateSprint {
-  id?: string;
-  nombre?: string;
-  inicio?: Date;
-  fin?: Date;
+  handleClose: () => void;
+  sprintToEdit?: ISprint;
+  onSubmit: (sprint: ISprint) => void;
 }
 
-export const CreateSprintModal: FC<IPropsCreateSprint> = () => {
-  const initialValues: ISprint = {
-    id: "",
-    nombre: "",
-    inicio: new Date(),
-    fin: new Date(),
-    tasks: [],
-  };
+const CreateSprintModal: FC<IPropsCreateSprint> = ({
+  handleClose,
+  sprintToEdit,
+  onSubmit,
+}) => {
+  const [nombre, setNombre] = useState("");
+  const [inicio, setInicio] = useState("");
+  const [fin, setFin] = useState("");
 
-  const [sprint] = useState<ISprint>(initialValues);
+  useEffect(() => {
+    if (sprintToEdit) {
+      setNombre(sprintToEdit.nombre);
+      setInicio(new Date(sprintToEdit.inicio).toISOString().split("T")[0]);
+      setFin(new Date(sprintToEdit.fin).toISOString().split("T")[0]);
+    }
+  }, [sprintToEdit]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!nombre || !inicio || !fin) {
+      alert("Completa todos los campos");
+      return;
+    }
+
+    const sprint: ISprint = {
+      id: sprintToEdit?.id || "",
+      nombre,
+      inicio: new Date(inicio),
+      fin: new Date(fin),
+      tasks: sprintToEdit?.tasks || [],
+    };
+
+    onSubmit(sprint);
+    handleClose();
+  };
 
   return (
     <div className={styles.containerCreateSprintModal}>
-      <div className={styles.inputs}>
-        <h2>Crear Sprint</h2>
+      <form onSubmit={handleSubmit} className={styles.inputs}>
+        <h2>{sprintToEdit ? "Editar Sprint" : "Crear Sprint"}</h2>
+
         <input
           type="text"
           placeholder="Nombre"
-          value={sprint.nombre}
-          //onChange={}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
           className={styles.nombreSprint}
         />
+
         <input
           type="date"
-          placeholder="Fecha inicio"
-          value={sprint.inicio.toISOString().split("T")[0]}
-          //onChange={}
+          value={inicio}
+          onChange={(e) => setInicio(e.target.value)}
           className={styles.inicioSprint}
         />
+
         <input
           type="date"
-          placeholder="Fecha fin"
-          value={sprint.fin.toISOString().split("T")[0]}
-          //onChange={}
+          value={fin}
+          onChange={(e) => setFin(e.target.value)}
           className={styles.finSprint}
         />
+
         <div className={styles.buttons}>
-          <OpenButton
-          //onClick={}
-          />
-          <CloseButton
-          //onClick={}
-          />
+          <AcceptButton />
+          <CloseButton handleClose={handleClose} />
         </div>
-      </div>
+      </form>
     </div>
   );
 };
+
+export default CreateSprintModal;

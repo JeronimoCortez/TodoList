@@ -1,4 +1,5 @@
 .openButton {
+  all: unset;
   display: flex;
   border: 4px solid #5bcaa4;
   border-radius: 50%;
