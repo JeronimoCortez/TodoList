@@ -1,13 +1,20 @@
+import { useEffect, useState } from "react";
 import { ISprint } from "../../../types/ISprint";
 import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
+import { getSprintsController } from "../../../data/todoListController";
 
 const SprintsAside = () => {
-  const sprint: ISprint = {
-    nombre: "Sprint 1",
-    inicio: new Date("2025-03-26"),
-    fin: new Date("2025-03-31"),
+  const [sprints, setSprints] = useState<ISprint[]>();
+
+  const getSprints = async () => {
+    const sprints = await getSprintsController();
+    setSprints(sprints);
   };
+
+  useEffect(() => {
+    getSprints();
+  }, []);
 
   return (
     <div className={styles.containerAside}>
@@ -24,10 +31,11 @@ const SprintsAside = () => {
       </div>
 
       <div className={styles.line}></div>
-
-      <div className={styles.sprintCardContainer}>
-        <SprintCard sprint={sprint} />
-      </div>
+      {sprints?.map((sprint) => (
+        <div key={sprint.id} className={styles.sprintCardContainer}>
+          <SprintCard sprint={sprint} />
+        </div>
+      ))}
     </div>
   );
 };

@@ -19,7 +19,7 @@ const ListTareas: FC<IPropsITarea> = (tarea) => {
           Descripción: {tarea.tarea.descripcion}
         </span>
         <span className={styles.fecha}>
-          Fecha Límite: {tarea.tarea.fechaLimite.toISOString()}
+          Fecha Límite: {new Date(tarea.tarea.fechaLimite).toISOString()}
         </span>
       </div>
       <div className={styles.containerButton}>

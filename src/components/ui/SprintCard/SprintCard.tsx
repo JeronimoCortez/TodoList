@@ -14,8 +14,8 @@ const SprintCard: FC<IPropsSprintCard> = (sprint) => {
     <div className={styles.sprintCard}>
       <div className={styles.sprintCardHeader}>{sprint.sprint.nombre}</div>
       <div className={styles.sprintCardInfo}>
-        <div>Inicio: {sprint.sprint.inicio.toISOString()}</div>
-        <div>Fin: {sprint.sprint.fin.toISOString()} </div>
+        <div>Inicio: {new Date(sprint.sprint.inicio).toISOString()}</div>
+        <div>Fin: {new Date(sprint.sprint.fin).toISOString()} </div>
       </div>
       <div className={styles.sprintCardButtons}>
         <TaskEyeButton />
