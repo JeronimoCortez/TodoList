@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import { ISprint } from "../../../types/ISprint";
-import styles from "./CreateSprintModal.module.css";
+import styles from "./SprintModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
 import AcceptButton from "../AcceptButton/AcceptButton";
 
-interface IPropsCreateSprint {
+interface IPropsSprint {
   handleClose: () => void;
   sprintToEdit?: ISprint;
   onSubmit: (sprint: ISprint) => void;
 }
 
-const CreateSprintModal: FC<IPropsCreateSprint> = ({
+const SprintModal: FC<IPropsSprint> = ({
   handleClose,
   sprintToEdit,
   onSubmit,
@@ -48,7 +48,7 @@ const CreateSprintModal: FC<IPropsCreateSprint> = ({
   };
 
   return (
-    <div className={styles.containerCreateSprintModal}>
+    <div className={styles.containerSprintModal}>
       <form onSubmit={handleSubmit} className={styles.inputs}>
         <h2>{sprintToEdit ? "Editar Sprint" : "Crear Sprint"}</h2>
 
@@ -83,4 +83,4 @@ const CreateSprintModal: FC<IPropsCreateSprint> = ({
   );
 };
 
-export default CreateSprintModal;
+export default SprintModal;

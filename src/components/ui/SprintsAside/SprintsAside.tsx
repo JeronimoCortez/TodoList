@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { ISprint } from "../../../types/ISprint";
 import SprintCard from "../SprintCard/SprintCard";
-import CreateSprintModal from "../CreateSprintModal/CreateSprintModal";
+import SprintModal from "../SprintModal/SprintModal";
 import styles from "./SprintsAside.module.css";
 
 const SprintsAside = () => {
   const [isOpen, setOpen] = useState(false);
+  const [sprints, setSprints] = useState<ISprint[]>([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const sprint: ISprint = {
-    nombre: "Sprint 1",
-    inicio: new Date("2025-03-26"),
-    fin: new Date("2025-03-31"),
-    tasks: [],
+  const handleSubmitSprint = (newSprint: ISprint) => {
+    setSprints((prev) => {
+      const exists = prev.some((s) => s.id === newSprint.id);
+      if (exists) {
+        return prev.map((s) => (s.id === newSprint.id ? newSprint : s));
+      }
+      return [...prev, newSprint];
+    });
   };
 
   return (
@@ -38,10 +42,14 @@ const SprintsAside = () => {
       <div className={styles.line}></div>
 
       <div className={styles.sprintCardContainer}>
-        <SprintCard sprint={sprint} />
+        {sprints.map((sprint) => (
+          <SprintCard key={sprint.id} sprint={sprint} />
+        ))}
       </div>
 
-      {isOpen && <CreateSprintModal handleClose={handleClose} />}
+      {isOpen && (
+        <SprintModal handleClose={handleClose} onSubmit={handleSubmitSprint} />
+      )}
     </div>
   );
 };
