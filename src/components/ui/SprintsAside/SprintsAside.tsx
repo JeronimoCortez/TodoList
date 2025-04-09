@@ -3,9 +3,14 @@ import { ISprint } from "../../../types/ISprint";
 import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
 import { getSprintsController } from "../../../data/todoListController";
+import SprintModal from "../SprintModal/SprintModal";
 
 const SprintsAside = () => {
-  const [sprints, setSprints] = useState<ISprint[]>();
+  const [isOpen, setOpen] = useState(false);
+  const [sprints, setSprints] = useState<ISprint[]>([]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const getSprints = async () => {
     const sprints = await getSprintsController();
@@ -36,6 +41,8 @@ const SprintsAside = () => {
           <SprintCard sprint={sprint} />
         </div>
       ))}
+
+      {isOpen && <SprintModal handleClose={handleClose} />}
     </div>
   );
 };
