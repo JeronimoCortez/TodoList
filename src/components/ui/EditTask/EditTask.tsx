@@ -32,7 +32,7 @@ export const EditTask: FC<IPropsEditTask> = ({ tarea, onClose, children }) => {
           name="fechaLimite"
           type="date"
           placeholder="Fecha fin"
-          value={task.fechaLimite.toISOString().split("T")[0]}
+          // value={task.fechaLimite.toISOString().split("T")[0]}
           className={styles.finTask}
           onChange={(e) =>
             setTask({ ...task, fechaLimite: new Date(e.target.value) })
