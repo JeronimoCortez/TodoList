@@ -1,8 +1,13 @@
+import { FC } from "react";
 import styles from "./AcceptButton.module.css";
 
-const AcceptButton = () => {
+type IPropsAcceptButton = {
+  onClick: VoidFunction;
+};
+
+const AcceptButton: FC<IPropsAcceptButton> = ({ onClick }) => {
   return (
-    <button className={styles.openButton}>
+    <button type="button" onClick={onClick} className={styles.openButton}>
       <img src="./check.svg" alt="" />
     </button>
   );

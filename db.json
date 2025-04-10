@@ -1,32 +1,38 @@
 {
-    "backlog": {
-"tasks": [
+  "backlog": {
+    "tareas": [
       {
-        "id": "2025-04-03T15:47:59.628Z",
-        "titulo": "Tarea 1",
-        "descripcion": "Crear controlador backlog",
-        "fechaLimite": "2025-06-03T15:45:59.628Z",
-        "estado": "PENDIENTE"
+        "id": "dcec0ad4-31e0-4279-8ccf-72bd1f20b52d",
+        "titulo": "Tarea backlog",
+        "descripcion": "Descripcion tarea backlog",
+        "estado": "pendiente",
+        "fechaLimite": "2025-03-05"
       }
     ]
-    },
+  },
+  "sprintList": {
     "sprints": [
       {
-        "id": "2025-04-03T15:45:59.628Z",
-        "nombre": "Sprint 1",
-        "inicio": "2025-04-03T15:45:59.628Z",
-        "fin": "2025-04-03T15:45:59.628Z",
-        "tasks": [
-          {
-          "id": "2025-04-03T15:48:59.628Z",
-          "titulo": "Tarea 1",
-          "descripcion": "Crear controlador modals",
-          "fechaLimite": "2025-05-03T15:45:59.628Z",
-          "estado": "PENDIENTE"
-          }
-        ]
+        "id": "",
+        "nombre": "Sprint 3",
+        "inicio": "2025-04-10T00:00:00.000Z",
+        "fin": "2025-04-17T00:00:00.000Z",
+        "tasks": []
+      },
+      {
+        "id": "",
+        "nombre": "Sprint 3",
+        "inicio": "2025-04-10T00:00:00.000Z",
+        "fin": "2025-04-17T00:00:00.000Z",
+        "tasks": []
+      },
+      {
+        "id": "",
+        "nombre": "Sprint 4",
+        "inicio": "2025-04-10T00:00:00.000Z",
+        "fin": "2025-04-17T00:00:00.000Z",
+        "tasks": []
       }
     ]
-    
-  
+  }
 }

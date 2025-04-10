@@ -14,7 +14,7 @@ const SprintsAside = () => {
 
   const getSprints = async () => {
     const sprints = await getSprintsController();
-    setSprints(sprints);
+    if (sprints) setSprints(sprints);
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const SprintsAside = () => {
       <div className={styles.containerTitleButton}>
         <h3 className={styles.title}>
           Lista de sprints
-          <button className={styles.buttonAddSprint}>
+          <button className={styles.buttonAddSprint} onClick={handleOpen}>
             <img className={styles.addIcon} src="./add.svg" alt="" />
           </button>
         </h3>

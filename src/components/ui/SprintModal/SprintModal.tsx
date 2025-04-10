@@ -1,81 +1,73 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { ISprint } from "../../../types/ISprint";
 import styles from "./SprintModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
 import AcceptButton from "../AcceptButton/AcceptButton";
+import {
+  createSprintController,
+  updateSprintController,
+} from "../../../data/todoListController";
 
 interface IPropsSprint {
   handleClose: () => void;
   sprintToEdit?: ISprint;
-  onSubmit: (sprint: ISprint) => void;
 }
 
-const SprintModal: FC<IPropsSprint> = ({
-  handleClose,
-  sprintToEdit,
-  onSubmit,
-}) => {
-  const [nombre, setNombre] = useState("");
-  const [inicio, setInicio] = useState("");
-  const [fin, setFin] = useState("");
+const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
+  const initialValues: ISprint = sprintToEdit
+    ? sprintToEdit
+    : {
+        id: "",
+        nombre: "",
+        inicio: new Date(),
+        fin: new Date(),
+        tasks: [],
+      };
+  const [sprint, setSprint] = useState<ISprint>(initialValues);
 
-  useEffect(() => {
-    if (sprintToEdit) {
-      setNombre(sprintToEdit.nombre);
-      setInicio(new Date(sprintToEdit.inicio).toISOString().split("T")[0]);
-      setFin(new Date(sprintToEdit.fin).toISOString().split("T")[0]);
-    }
-  }, [sprintToEdit]);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!nombre || !inicio || !fin) {
-      alert("Completa todos los campos");
-      return;
-    }
-
-    const sprint: ISprint = {
-      id: sprintToEdit?.id || "",
-      nombre,
-      inicio: new Date(inicio),
-      fin: new Date(fin),
-      tasks: sprintToEdit?.tasks || [],
-    };
-
-    onSubmit(sprint);
-    handleClose();
+  const createSprint = async () => {
+    console.log("Creando sprint....");
+    setSprint({ ...sprint, id: new Date().toISOString() });
+    await createSprintController(sprint);
+  };
+  const updateSprint = async () => {
+    console.log("Actualizando sprint...");
+    await updateSprintController(sprint);
   };
 
   return (
     <div className={styles.containerSprintModal}>
-      <form onSubmit={handleSubmit} className={styles.inputs}>
+      <form className={styles.inputs}>
         <h2>{sprintToEdit ? "Editar Sprint" : "Crear Sprint"}</h2>
 
         <input
           type="text"
           placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
+          value={sprint.nombre}
+          onChange={(e) => setSprint({ ...sprint, nombre: e.target.value })}
           className={styles.nombreSprint}
         />
-
         <input
           type="date"
-          value={inicio}
-          onChange={(e) => setInicio(e.target.value)}
+          placeholder="Fecha inicio"
+          onChange={(e) =>
+            setSprint({ ...sprint, inicio: new Date(e.target.value) })
+          }
           className={styles.inicioSprint}
         />
-
         <input
           type="date"
-          value={fin}
-          onChange={(e) => setFin(e.target.value)}
+          placeholder="Fecha fin"
+          onChange={(e) =>
+            setSprint({ ...sprint, fin: new Date(e.target.value) })
+          }
           className={styles.finSprint}
         />
 
         <div className={styles.buttons}>
-          <AcceptButton />
+          <AcceptButton
+            onClick={() => (sprintToEdit ? updateSprint() : createSprint())}
+          />
           <CloseButton handleClose={handleClose} />
         </div>
       </form>
