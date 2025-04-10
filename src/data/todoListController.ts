@@ -3,10 +3,11 @@ import { ISprint } from "../types/ISprint";
 import { API_URL } from "../utils/constantes";
 import { putTodoList } from "../http/todoList";
 
+
 export const getSprintsController = async (): Promise<ISprint[] | undefined> => {
   try {
-    const response = await axios.get<{sprints: ISprint[]}>(API_URL);
-    return response.data.sprints
+    const response = await axios.get<ISprint[]>(`${API_URL}/sprints`);
+    return response.data
   } catch(error) {
     console.error("Error al traer sprints: ", error)
   }
@@ -15,7 +16,6 @@ export const getSprintsController = async (): Promise<ISprint[] | undefined> => 
 export const getSprintByIdController = async (id: string) => {
   try {
     const sprintDb = await getSprintsController();
-
     if (sprintDb) {
       const sprintForId = sprintDb.find((sprint) => sprint.id === id)
       return sprintForId;
@@ -25,6 +25,7 @@ export const getSprintByIdController = async (id: string) => {
     console.error(`Error al traer sprint ${id}: `, error)
   }
 }
+
 
 export const createSprintController = async (sprintNuevo: ISprint) => {
   try{

@@ -4,8 +4,12 @@
   height: 80vh;
   padding: 0.4rem;
   border-radius: 5px;
-  width: 15vw;
+  width: 20vw;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
+
 
 .buttonBacklog {
   all: unset;

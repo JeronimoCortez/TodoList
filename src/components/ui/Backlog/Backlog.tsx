@@ -8,30 +8,17 @@ import OpenButton from "../OpenButton/OpenButton";
 import CloseButton from "../CloseButton/CloseButton";
 
 const Backlog = () => {
-  const tareasEjemplo: ITarea[] = [
-    {
-      titulo: "aaa",
-      descripcion: "bbb",
-      fechaLimite: new Date(),
-    },
-    {
-      titulo: "bbb",
-      descripcion: "ccc",
-      fechaLimite: new Date(),
-    },
-    {
-      titulo: "ccc",
-      descripcion: "ddd",
-      fechaLimite: new Date(),
-    },
-    {
-      titulo: "ddd",
-      descripcion: "eee",
-      fechaLimite: new Date(),
-    },
-  ];
-
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [tareas, setTareas] = useState<ITarea[]>();
+
+  const getTareas = async () => {
+    const tareasDb = await getBacklogController();
+    setTareas(tareasDb);
+  };
+
+  useEffect(() => {
+    getTareas();
+  }, []);
 
   return (
     <div className={styles.containerBacklog}>
@@ -43,6 +30,10 @@ const Backlog = () => {
         Crear nueva tarea <img src="./list.svg" alt="" />
       </button>
 
+      {tareas?.map((tarea) => (
+        <ListTareas key={tarea.id} tarea={tarea} />
+      ))}
+
       {isOpenModal && (
         <CreateTask onClose={() => setIsOpenModal(false)}>
           <div className={styles.buttons}>
@@ -52,7 +43,7 @@ const Backlog = () => {
         </CreateTask>
       )}
 
-      <ListTareas tareas={tareasEjemplo} />
+      <ListTareas tareas={tareas} />
     </div>
   );
 };
