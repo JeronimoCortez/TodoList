@@ -10,34 +10,36 @@ type IPropsITarea = {
   tarea: ITarea;
 };
 
-const ListTareas: FC<IPropsITarea> = (tarea) => {
+const ListTareas: FC<IPropsITarea> = ({ tarea }) => {
   return (
-    <div className={styles.tarea}>
-      <div className={styles.containerData}>
-        <span className={styles.titulo}>Título: {tarea.tarea.titulo}</span>
-        <span className={styles.descripcion}>
-          Descripción: {tarea.tarea.descripcion}
-        </span>
-        <span className={styles.fecha}>
-          Fecha Límite: {new Date(tarea.tarea.fechaLimite).toISOString()}
-        </span>
-      </div>
-      <div className={styles.containerButton}>
-        <button className={styles.enviar}>
-          Enviar a <SendButton />
-        </button>
-        <div className={styles.selectContainer}>
-          <select className={styles.select}>
-            <option>Seleccione una Sprint</option>
-          </select>
+    <>
+      <div className={styles.tarea}>
+        <div className={styles.containerData}>
+          <span className={styles.titulo}>Título: {tarea.titulo}</span>
+          <span className={styles.descripcion}>
+            Descripción: {tarea.descripcion}
+          </span>
+          <span className={styles.fecha}>
+            Fecha Límite: {new Date(tarea.fechaLimite).toISOString()}
+          </span>
         </div>
-        <div className={styles.acciones}>
-          <TaskEyeButton />
-          <EditButton />
-          <DeleteButton />
+        <div className={styles.containerButton}>
+          <button className={styles.enviar}>
+            Enviar a <SendButton />
+          </button>
+          <div className={styles.selectContainer}>
+            <select className={styles.select}>
+              <option>Seleccione una Sprint</option>
+            </select>
+          </div>
+          <div className={styles.acciones}>
+            <TaskEyeButton />
+            <EditButton tarea={tarea} />
+            <DeleteButton />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

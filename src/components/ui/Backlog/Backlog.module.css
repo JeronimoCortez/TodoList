@@ -20,7 +20,7 @@
   color: #000;
   font-size: 40px;
   font-weight: bold;
-  margin: .4rem .8rem;
+  margin: 0.4rem 0.8rem;
 }
 
 .buttonTask {
@@ -38,4 +38,11 @@
 
 .buttonTask:hover {
   cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  margin: 0 auto;
 }
