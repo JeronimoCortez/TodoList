@@ -1,5 +1,4 @@
 import { FC } from "react";
-import styles from "./OpenButton.module.css";
 
 interface IPropsOpenButton {
   onClick: () => void;
@@ -7,7 +6,7 @@ interface IPropsOpenButton {
 
 const OpenButton: FC<IPropsOpenButton> = ({ onClick }) => {
   return (
-    <button className={styles.openButton} onClick={onClick}>
+    <button onClick={onClick}>
       <img src="./check.svg" alt="" />
     </button>
   );

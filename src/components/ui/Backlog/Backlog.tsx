@@ -14,6 +14,7 @@ const Backlog = () => {
 
   const getTareas = async () => {
     const tareasDb = await getBacklogController();
+    console.log(tareasDb);
     setTareas(tareasDb);
   };
 

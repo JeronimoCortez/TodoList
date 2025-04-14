@@ -6,9 +6,9 @@ import { putBacklog, putTodoList } from "../http/todoList"
 
 export const getBacklogController = async (): Promise<ITarea[] | undefined> => {
   try {
-    const response = await axios.get<({tasks: ITarea[]})>(`${API_URL}/backlog`)
-    console.log(response.data.tasks)
-    return response.data.tasks
+    const response = await axios.get<({tareas: ITarea[]})>(`${API_URL}/backlog`)
+    console.log(response.data.tareas)
+    return response.data.tareas
   } catch (error) {
     console.error("Error al traer tareas: ", error)
   }

@@ -34,7 +34,7 @@ const ListTareas: FC<IPropsITarea> = ({ tarea }) => {
           </div>
           <div className={styles.acciones}>
             <TaskEyeButton />
-            <EditButton tarea={tarea} />
+            <EditButton onClick={() => {}} />
             <DeleteButton />
           </div>
         </div>
