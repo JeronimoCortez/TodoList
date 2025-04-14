@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "./CloseButton.module.css";
 
 interface IPropsCloseButton {
-  onClick: () => void;
+  onClick: VoidFunction;
 }
 
 const CloseButton: FC<IPropsCloseButton> = ({ onClick }) => {

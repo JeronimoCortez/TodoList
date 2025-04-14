@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ITarea } from "../../../types/ITarea";
 import ListTareas from "../ListTareas/ListTareas";
-// import TaskCard from "../TaskCard/TaskCard";
 import styles from "./Backlog.module.css";
-import { CreateTask } from "../CreateTask/CreateTask";
-import OpenButton from "../OpenButton/OpenButton";
-import CloseButton from "../CloseButton/CloseButton";
+import { TaskModal } from "../TaskModal/TaskModal";
+import { getBacklogController } from "../../../data/backlogController";
 
 const Backlog = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -31,19 +29,10 @@ const Backlog = () => {
       </button>
 
       {tareas?.map((tarea) => (
-        <ListTareas key={tarea.id} tarea={tarea} />
+        <ListTareas key={tarea.id} tareas={tareas} />
       ))}
 
-      {isOpenModal && (
-        <CreateTask onClose={() => setIsOpenModal(false)}>
-          <div className={styles.buttons}>
-            <OpenButton onClick={() => setIsOpenModal(true)} />
-            <CloseButton onClick={() => setIsOpenModal(false)} />
-          </div>
-        </CreateTask>
-      )}
-
-      <ListTareas tareas={tareas} />
+      {isOpenModal && <TaskModal handleClose={() => setIsOpenModal(false)} />}
     </div>
   );
 };

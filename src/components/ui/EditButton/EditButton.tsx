@@ -1,9 +1,7 @@
 import { useState } from "react";
 import styles from "./EditButton.module.css";
-import { EditTask } from "../EditTask/EditTask";
 import { ITarea } from "../../../types/ITarea";
-import OpenButton from "../OpenButton/OpenButton";
-import CloseButton from "../CloseButton/CloseButton";
+import { TaskModal } from "../TaskModal/TaskModal";
 
 interface IPropsEditButton {
   tarea: ITarea;
@@ -21,12 +19,10 @@ const EditButton = ({ tarea }: IPropsEditButton) => {
       </button>
 
       {isOpenModal && (
-        <EditTask tarea={tarea} onClose={() => setIsOpenModal(false)}>
-          <div className={styles.buttons}>
-            <OpenButton onClick={() => setIsOpenModal(true)} />
-            <CloseButton onClick={() => setIsOpenModal(false)} />
-          </div>
-        </EditTask>
+        <TaskModal
+          handleClose={() => setIsOpenModal(false)}
+          taskToEdit={tarea}
+        />
       )}
     </>
   );
