@@ -1,4 +1,4 @@
-.containerCreateTaskModal {
+.containerTaskModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -45,10 +45,13 @@ h2 {
   color: #fff;
 }
 
-.descripcionTask::placeholder {
-  color: #fff;
-}
-
 .finTask {
   margin-bottom: 0.8rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  margin: 0 auto;
 }
