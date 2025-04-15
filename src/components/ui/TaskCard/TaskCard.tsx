@@ -34,9 +34,11 @@ const TaskCard: FC<IPropsITareaCard> = (tarea) => {
       <div className={styles.taskCardButtons}>
         <button className={styles.buttonSendBacklog}>Enviar al Backlog</button>
         <button className={styles.setTask}>En progreso...</button>
+        {/* 
+        hay que declarar las funciones de cada boton
         <TaskEyeButton />
         <EditButton />
-        <DeleteButton />
+        <DeleteButton /> */}
       </div>
     </div>
   );

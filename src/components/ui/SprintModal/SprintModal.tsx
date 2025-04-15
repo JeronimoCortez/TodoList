@@ -7,6 +7,7 @@ import {
   createSprintController,
   updateSprintController,
 } from "../../../data/todoListController";
+import Swal from "sweetalert2";
 
 interface IPropsSprint {
   handleClose: () => void;
@@ -17,7 +18,7 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
   const initialValues: ISprint = sprintToEdit
     ? sprintToEdit
     : {
-        id: "",
+        id: new Date().toISOString(),
         nombre: "",
         inicio: new Date(),
         fin: new Date(),
@@ -27,12 +28,28 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
 
   const createSprint = async () => {
     console.log("Creando sprint....");
-    setSprint({ ...sprint, id: new Date().toISOString() });
+    setSprint({ ...sprint });
     await createSprintController(sprint);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "El sprint se creo correctamente",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    handleClose();
   };
   const updateSprint = async () => {
     console.log("Actualizando sprint...");
     await updateSprintController(sprint);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "El sprint se actualizo correctamente",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    handleClose();
   };
 
   return (

@@ -7,7 +7,7 @@ type IPropsEditButton = {
 const EditButton: FC<IPropsEditButton> = ({ onClick }) => {
   return (
     <button onClick={onClick} className={styles.editButton}>
-      <img src="./edit.svg" alt="" />
+      <img src="../edit.svg" alt="" />
     </button>
   );
 };

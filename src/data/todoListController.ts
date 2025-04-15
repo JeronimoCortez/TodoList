@@ -13,14 +13,14 @@ export const getSprintsController = async (): Promise<ISprint[] | undefined> => 
   }
 }
 
-export const getSprintByIdController = async (id: string) => {
+export const getSprintByIdController = async (id: string): Promise<ISprint | undefined> => {
   try {
     const sprintDb = await getSprintsController();
     if (sprintDb) {
       const sprintForId = sprintDb.find((sprint) => sprint.id === id)
       return sprintForId;
     }
-    return null;
+    return ;
   } catch(error) {
     console.error(`Error al traer sprint ${id}: `, error)
   }

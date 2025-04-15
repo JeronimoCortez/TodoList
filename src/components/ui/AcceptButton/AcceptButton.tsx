@@ -8,7 +8,7 @@ type IPropsAcceptButton = {
 const AcceptButton: FC<IPropsAcceptButton> = ({ onClick }) => {
   return (
     <button type="button" onClick={onClick} className={styles.openButton}>
-      <img src="./check.svg" alt="" />
+      <img src="../check.svg" alt="" />
     </button>
   );
 };
