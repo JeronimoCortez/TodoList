@@ -1,14 +1,15 @@
 import axios from "axios"
 import { ITarea } from "../types/ITarea"
 import { API_URL } from "../utils/constantes"
-import { getSprintByIdController, getSprintsController } from "./todoListController"
+import { getSprintByIdController, getSprintsController, updateSprintController } from "./todoListController"
 import { putBacklog, putTodoList } from "../http/todoList"
+import { ISprint } from "../types/ISprint"
 
 export const getBacklogController = async (): Promise<ITarea[] | undefined> => {
   try {
-    const response = await axios.get<({tareas: ITarea[]})>(`${API_URL}/backlog`)
-    console.log(response.data.tareas)
-    return response.data.tareas
+    const response = await axios.get<({tasks: ITarea[]})>(`${API_URL}/backlog`)
+    console.log(response.data.tasks)
+    return response.data.tasks
   } catch (error) {
     console.error("Error al traer tareas: ", error)
   }
@@ -22,6 +23,39 @@ export const getTasksBySprintController = async (idSprint: string) => {
     console.error(`Error al traer tareas del sprint ${idSprint}: ${error}`)
   }
 }
+
+export const createTaskToBacklog = async (task: ITarea) => {
+  try {
+    const taskDb = await getBacklogController();
+    if (taskDb) {
+      await putBacklog([...taskDb, task]);
+    }
+    return task;
+  } catch (error) {
+    console.error("Error al crear tarea: ", error)
+  }
+}
+export const createTaskToSprint = async (task: ITarea, idSprint: string) => {
+  try {
+    const sprintsDb = await getSprintsController();
+    const sprintIndex = sprintsDb?.findIndex((sprint) => sprint.id === idSprint);
+
+    if (sprintIndex === -1 || sprintIndex === undefined || !sprintsDb) {
+      console.log("Sprint no encontrado");
+      return;
+    }
+
+    const sprintActualizado = {
+      ...sprintsDb[sprintIndex],
+      tasks: [...sprintsDb[sprintIndex].tasks, task],
+    };
+
+    await updateSprintController(sprintActualizado);
+  } catch (error) {
+    console.log("Error al crear tarea: ", error);
+  }
+};
+
 
 export const updateTaskBacklogController = async (tareaEditada: ITarea) => {
   try {
@@ -104,8 +138,8 @@ export const postTaskSprintToBacklog = async (tarea: ITarea, idSprint: string) =
   try {
     const taskDb = await getBacklogController();
     if (taskDb) {
-      deleteTaskSprint(tarea.id, idSprint);
       await putBacklog([...taskDb, tarea])
+      deleteTaskSprint(tarea.id, idSprint);
     }
     return tarea;
   } catch (error) {
@@ -124,6 +158,7 @@ export const postTaskBacklogToSprint = async (tarea: ITarea, idSprint: string) =
         return sprint;
       })
       await putTodoList(result);
+      deleteTaskBacklog(tarea.id)
       return tarea;
     }
   } catch (error) {

@@ -27,7 +27,6 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
   const [sprint, setSprint] = useState<ISprint>(initialValues);
 
   const createSprint = async () => {
-    console.log("Creando sprint....");
     setSprint({ ...sprint });
     await createSprintController(sprint);
     Swal.fire({
@@ -40,7 +39,6 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
     handleClose();
   };
   const updateSprint = async () => {
-    console.log("Actualizando sprint...");
     await updateSprintController(sprint);
     Swal.fire({
       position: "center",

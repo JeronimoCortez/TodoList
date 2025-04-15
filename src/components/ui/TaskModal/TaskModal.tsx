@@ -2,25 +2,76 @@ import { FC, useState } from "react";
 import { ITarea } from "../../../types/ITarea";
 import styles from "./TaskModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
-import OpenButton from "../OpenButton/OpenButton";
+import AcceptButton from "../AcceptButton/AcceptButton";
+import {
+  createTaskToBacklog,
+  createTaskToSprint,
+  updateTaskBacklogController,
+  updateTaskBySprintController,
+} from "../../../data/backlogController";
+import Swal from "sweetalert2";
 
 interface IPropsTask {
   handleClose: VoidFunction;
   taskToEdit?: ITarea;
+  idSprint?: String;
 }
 
-export const TaskModal: FC<IPropsTask> = ({ handleClose, taskToEdit }) => {
+export const TaskModal: FC<IPropsTask> = ({
+  handleClose,
+  taskToEdit,
+  idSprint,
+}) => {
   const initialValues: ITarea = taskToEdit
     ? taskToEdit
     : {
-        id: "",
+        id: new Date().toISOString(),
         titulo: "",
         descripcion: "",
         fechaLimite: new Date(),
-        estado: 1,
+        estado: 0,
       };
 
   const [task, setTask] = useState<ITarea>(initialValues);
+
+  const createTask = async () => {
+    if (idSprint) {
+      setTask({ ...task });
+      console.log(task);
+      console.log("Creando... ");
+      await createTaskToSprint(task, String(idSprint));
+    } else {
+      setTask({ ...task });
+      await createTaskToBacklog(task);
+    }
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "La tarea se creo correctamente",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    handleClose();
+  };
+
+  const updateTask = async () => {
+    if (idSprint) {
+      await updateTaskBySprintController(String(idSprint), task);
+    } else {
+      await updateTaskBacklogController(task);
+    }
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "La tarea se edito correctamente",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    handleClose();
+  };
 
   return (
     <div className={styles.containerTaskModal}>
@@ -37,6 +88,7 @@ export const TaskModal: FC<IPropsTask> = ({ handleClose, taskToEdit }) => {
         <input
           type="string"
           placeholder="Descripción:"
+          value={task.descripcion}
           onChange={(e) => setTask({ ...task, descripcion: e.target.value })}
           className={styles.descripcionTask}
         />
@@ -50,8 +102,8 @@ export const TaskModal: FC<IPropsTask> = ({ handleClose, taskToEdit }) => {
         />
 
         <div className={styles.buttons}>
-          <OpenButton onClick={() => {}} />
-          <CloseButton onClick={handleClose} />
+          <AcceptButton onClick={taskToEdit ? updateTask : createTask} />
+          <CloseButton handleClose={handleClose} />
         </div>
       </form>
     </div>
