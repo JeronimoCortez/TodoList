@@ -1,10 +1,15 @@
+import { FC } from "react";
 import styles from "./DeleteButton.module.css";
 
-const DeleteButton = () => {
+type IPropsDeleteButton = {
+  handleDelete: VoidFunction;
+};
+
+const DeleteButton: FC<IPropsDeleteButton> = ({ handleDelete }) => {
   return (
-    <div className={styles.deleteButton}>
-      <img src="./delete.svg" alt="" />
-    </div>
+    <button onClick={handleDelete} className={styles.deleteButton}>
+      <img src="../delete.svg" alt="" />
+    </button>
   );
 };
 

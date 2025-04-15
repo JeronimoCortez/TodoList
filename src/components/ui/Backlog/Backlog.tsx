@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { getBacklogController } from "../../../data/backlogController";
+import { ITarea } from "../../../types/ITarea";
 import ListTareas from "../ListTareas/ListTareas";
 import styles from "./Backlog.module.css";
-import { ITarea } from "../../../types/ITarea";
+import { TaskModal } from "../TaskModal/TaskModal";
+
+import { getBacklogController } from "../../../data/backlogController";
 
 const Backlog = () => {
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [tareas, setTareas] = useState<ITarea[]>();
 
   const getTareas = async () => {
-    const tareasDb = await getBacklogController();
-    setTareas(tareasDb);
+    const tareasBacklog = await getBacklogController();
+    setTareas(tareasBacklog);
   };
 
   useEffect(() => {
@@ -18,15 +21,19 @@ const Backlog = () => {
 
   return (
     <div className={styles.containerBacklog}>
-      <div className={styles.containerTitleButton}>
-        <h2 className={styles.title}>Backlog</h2>
-        <button className={styles.buttonTask}>
-          Crear nueva tarea <img src="./list.svg" alt="" />
-        </button>
-      </div>
+      <h2 className={styles.title}>Backlog</h2>
+      <button
+        className={styles.buttonTask}
+        onClick={() => setIsOpenModal(true)}
+      >
+        Crear nueva tarea <img src="./list.svg" alt="" />
+      </button>
+
       {tareas?.map((tarea) => (
         <ListTareas key={tarea.id} tarea={tarea} />
       ))}
+
+      {isOpenModal && <TaskModal handleClose={() => setIsOpenModal(false)} />}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { ITarea } from "../types/ITarea";
 
 export const putTodoList = async (sprints: ISprint[]) => {
   try {
-    const response = await axios.put<ITodoListApp>(`${API_URL}/sprints`, {
+    const response = await axios.put<ITodoListApp>(`${API_URL}/sprintList`, {
       sprints: sprints,
     })
 

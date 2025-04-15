@@ -6,21 +6,21 @@ import { putTodoList } from "../http/todoList";
 
 export const getSprintsController = async (): Promise<ISprint[] | undefined> => {
   try {
-    const response = await axios.get<ISprint[]>(`${API_URL}/sprints`);
-    return response.data
+    const response = await axios.get<{ sprints: ISprint[]  }>(`${API_URL}/sprintList`);
+    return response.data.sprints
   } catch(error) {
     console.error("Error al traer sprints: ", error)
   }
 }
 
-export const getSprintByIdController = async (id: string) => {
+export const getSprintByIdController = async (id: string): Promise<ISprint | undefined> => {
   try {
     const sprintDb = await getSprintsController();
     if (sprintDb) {
       const sprintForId = sprintDb.find((sprint) => sprint.id === id)
       return sprintForId;
     }
-    return null;
+    return ;
   } catch(error) {
     console.error(`Error al traer sprint ${id}: `, error)
   }
@@ -32,6 +32,7 @@ export const createSprintController = async (sprintNuevo: ISprint) => {
     const sprintDb = await getSprintsController();
     if (sprintDb) {
       await putTodoList([...sprintDb, sprintNuevo]);
+      console.log("Sprint creado con exito")
     } else {
       await putTodoList([sprintNuevo])
     }
@@ -49,6 +50,7 @@ try {
   if (sprintDb) {
     const result = sprintDb.map((sprint) => sprint.id === sprintActualizado.id ? {...sprint, ...sprintActualizado} : sprint);
     await putTodoList(result);
+    console.log("Sprint actualizado con exito")
   }
   
   return sprintActualizado;

@@ -1,10 +1,10 @@
 import styles from "./CloseButton.module.css";
 
-const CloseButton = () => {
+const CloseButton = ({ handleClose }: { handleClose: () => void }) => {
   return (
-    <div className={styles.closeButton}>
-      <img src="./close.svg" alt="" />
-    </div>
+    <button className={styles.closeButton} onClick={handleClose}>
+      <img src="../close.svg" alt="Cerrar" />
+    </button>
   );
 };
 

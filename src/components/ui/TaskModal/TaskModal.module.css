@@ -1,0 +1,57 @@
+.containerTaskModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.inputs {
+  background: #7484d3;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 35vw;
+  text-align: center;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 0.8rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.tituloTask,
+.descripcionTask,
+.finTask {
+  width: 90%;
+  padding: 0.4rem;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #ffffff30;
+  color: #fff;
+}
+
+.tituloTask::placeholder {
+  color: #fff;
+}
+
+.finTask {
+  margin-bottom: 0.8rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  margin: 0 auto;
+}

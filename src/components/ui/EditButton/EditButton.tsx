@@ -1,10 +1,14 @@
+import { FC } from "react";
 import styles from "./EditButton.module.css";
+type IPropsEditButton = {
+  onClick: VoidFunction;
+};
 
-const EditButton = () => {
+const EditButton: FC<IPropsEditButton> = ({ onClick }) => {
   return (
-    <div className={styles.editButton}>
-      <img src="./edit.svg" alt="" />
-    </div>
+    <button onClick={onClick} className={styles.editButton}>
+      <img src="../edit.svg" alt="" />
+    </button>
   );
 };
 

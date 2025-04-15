@@ -1,10 +1,15 @@
+import { FC } from "react";
 import styles from "./TaskEyeButton.module.css";
 
-const TaskEyeButton = () => {
+type IPropsTaskEyeButton = {
+  redirect: VoidFunction;
+};
+
+const TaskEyeButton: FC<IPropsTaskEyeButton> = ({ redirect }) => {
   return (
-    <div className={styles.taskEyeButton}>
-      <img src="./visibility.svg" alt="" />
-    </div>
+    <button onClick={redirect} className={styles.taskEyeButton}>
+      <img src="../visibility.svg" alt="" />
+    </button>
   );
 };
 
