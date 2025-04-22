@@ -42,11 +42,11 @@ const SprintsAside = () => {
       </div>
 
       <div className={styles.line}></div>
-      {sprints?.map((sprint) => (
-        <div key={sprint.id} className={styles.sprintCardContainer}>
+      <div className={styles.sprintCardContainer}>
+        {sprints?.map((sprint) => (
           <SprintCard sprint={sprint} />
-        </div>
-      ))}
+        ))}
+      </div>
 
       {isOpen && <SprintModal handleClose={handleClose} />}
     </div>

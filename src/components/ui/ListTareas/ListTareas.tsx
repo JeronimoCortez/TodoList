@@ -36,13 +36,18 @@ const ListTareas: FC<IPropsITarea> = ({ tarea }) => {
     <>
       <div className={styles.tarea}>
         <div className={styles.containerData}>
-          <span className={styles.titulo}>Título: {tarea.titulo}</span>
-          <span className={styles.descripcion}>
-            Descripción: {tarea.descripcion}
-          </span>
-          <span className={styles.fecha}>
-            Fecha Límite: {new Date(tarea.fechaLimite).toISOString()}
-          </span>
+          <p className={styles.titleContainer}>
+            <span className={styles.titulo}>Título: </span>
+            {tarea.titulo}
+          </p>
+          <p className={styles.titleContainer}>
+            <span className={styles.descripcion}>Descripción: </span>
+            {tarea.descripcion}
+          </p>
+          <p className={styles.titleContainer}>
+            <span className={styles.fecha}>Fecha Límite: </span>
+            {new Date(tarea.fechaLimite).toISOString()}
+          </p>
         </div>
         <div className={styles.containerButton}>
           <button

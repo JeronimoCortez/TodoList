@@ -24,6 +24,20 @@
             "descripcion": "lorem lorem",
             "fechaLimite": "2025-04-23T00:00:00.000Z",
             "estado": 0
+          },
+          {
+            "id": "2025-04-22T13:20:17.955Z",
+            "titulo": "python",
+            "descripcion": "haciendo tarea",
+            "fechaLimite": "2025-04-26T00:00:00.000Z",
+            "estado": 0
+          },
+          {
+            "id": "2025-04-22T13:20:42.131Z",
+            "titulo": "Java",
+            "descripcion": "haciendo tarea x2",
+            "fechaLimite": "2025-04-30T00:00:00.000Z",
+            "estado": 0
           }
         ]
       },
@@ -41,6 +55,13 @@
             "estado": 0
           }
         ]
+      },
+      {
+        "id": "2025-04-22T13:24:39.451Z",
+        "nombre": "urraka",
+        "inicio": "2025-04-23T00:00:00.000Z",
+        "fin": "2025-04-29T00:00:00.000Z",
+        "tasks": []
       }
     ]
   }
