@@ -6,7 +6,6 @@ import EditButton from "../EditButton/EditButton";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import { SendButton } from "../SendButton/SendButton";
 import { TaskModal } from "../TaskModal/TaskModal";
-import { postTaskBacklogToSprint } from "../../../data/backlogController";
 import useTarea from "../../../hooks/useTarea";
 import { sprintStore } from "../../../store/sprintStore";
 import { taskStore } from "../../../store/taskStore";
@@ -46,7 +45,7 @@ const ListTareas: FC<IPropsITarea> = ({ tarea }) => {
           </p>
           <p className={styles.titleContainer}>
             <span className={styles.fecha}>Fecha Límite: </span>
-            {new Date(tarea.fechaLimite).toISOString()}
+            {new Date(tarea.fechaLimite).toISOString().split("T")[0]}
           </p>
         </div>
         <div className={styles.containerButton}>

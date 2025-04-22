@@ -2,10 +2,17 @@
   "backlog": {
     "tasks": [
       {
-        "id": "2025-04-22T12:37:57.986Z",
-        "titulo": "tarea 1.1",
-        "descripcion": "1",
+        "id": "2025-04-22T13:20:17.955Z",
+        "titulo": "python 1.1",
+        "descripcion": "haciendo tarea",
         "fechaLimite": "2025-04-23T00:00:00.000Z",
+        "estado": 1
+      },
+      {
+        "id": "2025-04-22T22:22:00.262Z",
+        "titulo": "Tarea 1",
+        "descripcion": "lorem lorem",
+        "fechaLimite": "2025-04-24T00:00:00.000Z",
         "estado": 0
       }
     ]
@@ -15,28 +22,28 @@
       {
         "id": "2025-04-14T17:21:53.876Z",
         "nombre": "Sprint 1.3",
-        "inicio": "2025-04-23T00:00:00.000Z",
-        "fin": "2025-04-23T00:00:00.000Z",
+        "inicio": "2025-04-25T00:00:00.000Z",
+        "fin": "2025-04-26T00:00:00.000Z",
         "tasks": [
           {
-            "id": "2025-04-22T16:10:15.188Z",
-            "titulo": "Tarea 2.3",
+            "id": "2025-04-22T22:24:44.031Z",
+            "titulo": "lorem lorem",
+            "descripcion": "lorem lorem",
+            "fechaLimite": "2025-04-22T22:24:44.031Z",
+            "estado": 0
+          },
+          {
+            "id": "2025-04-22T17:52:20.506Z",
+            "titulo": "Tarea 1",
             "descripcion": "lorem lorem",
             "fechaLimite": "2025-04-23T00:00:00.000Z",
             "estado": 0
           },
           {
-            "id": "2025-04-22T13:20:17.955Z",
-            "titulo": "python",
-            "descripcion": "haciendo tarea",
-            "fechaLimite": "2025-04-26T00:00:00.000Z",
-            "estado": 0
-          },
-          {
-            "id": "2025-04-22T13:20:42.131Z",
-            "titulo": "Java",
-            "descripcion": "haciendo tarea x2",
-            "fechaLimite": "2025-04-30T00:00:00.000Z",
+            "id": "2025-04-22T22:40:41.270Z",
+            "titulo": "lorem lorem",
+            "descripcion": "lorem lorem",
+            "fechaLimite": "2025-04-23T00:00:00.000Z",
             "estado": 0
           }
         ]
@@ -53,15 +60,15 @@
             "descripcion": "lorem lorem lorem lorem",
             "fechaLimite": "2025-04-16T00:00:00.000Z",
             "estado": 0
+          },
+          {
+            "id": "2025-04-22T13:20:42.131Z",
+            "titulo": "Java",
+            "descripcion": "haciendo tarea x2",
+            "fechaLimite": "2025-04-30T00:00:00.000Z",
+            "estado": 2
           }
         ]
-      },
-      {
-        "id": "2025-04-22T13:24:39.451Z",
-        "nombre": "urraka",
-        "inicio": "2025-04-23T00:00:00.000Z",
-        "fin": "2025-04-29T00:00:00.000Z",
-        "tasks": []
       }
     ]
   }

@@ -4,14 +4,8 @@ import EditButton from "../EditButton/EditButton";
 import TaskEyeButton from "../TaskEyeButton/TaskEyeButton";
 import styles from "./TaskCard.module.css";
 import { ITarea } from "../../../types/ITarea";
-import {
-  deleteTaskSprint,
-  postTaskSprintToBacklog,
-  updateTaskBySprintController,
-} from "../../../data/backlogController";
 import { estadosTareas } from "../../../enum/estadosTareas";
 import { TaskModal } from "../TaskModal/TaskModal";
-import Swal from "sweetalert2";
 import { taskStore } from "../../../store/taskStore";
 import useSprint from "../../../hooks/useSprint";
 import { sprintStore } from "../../../store/sprintStore";
@@ -24,7 +18,8 @@ const TaskCard: FC<IPropsITareaCard> = ({ tarea }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const setTareaActiva = taskStore((state) => state.setTareaActiva);
   const { tareaActiva } = taskStore();
-  const { deleteTaskToSprint } = useSprint();
+  const { updateTaskSprint } = useSprint();
+  const { deleteTaskToSprint, taskToBacklog } = useSprint();
   const { sprintActivo } = sprintStore();
 
   const handleOpenModal = () => {
@@ -36,17 +31,21 @@ const TaskCard: FC<IPropsITareaCard> = ({ tarea }) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const taskToBacklog = async () => {
-    await postTaskSprintToBacklog(tarea, String(sprintActivo?.id));
+  const handleMoveTask = async () => {
+    let nuevoEstado;
+    if (tarea.estado === 2) {
+      nuevoEstado = 0;
+    } else {
+      nuevoEstado = tarea.estado + 1;
+    }
+    const tareaActualizada: ITarea = { ...tarea, estado: nuevoEstado };
+    updateTaskSprint(String(sprintActivo?.id), tareaActualizada);
   };
 
-  const handleMoveTask = async () => {
-    const nuevoEstado = tarea.estado + 1 < 2 ? tarea.estado + 1 : 2;
-    const tareaActualizada: ITarea = { ...tarea, estado: nuevoEstado };
-    await updateTaskBySprintController(
-      String(sprintActivo?.id),
-      tareaActualizada
-    );
+  const submitTaskToBacklog = () => {
+    if (sprintActivo) {
+      taskToBacklog(tarea, sprintActivo?.id);
+    }
   };
 
   const deleteTask = async () => {
@@ -60,34 +59,35 @@ const TaskCard: FC<IPropsITareaCard> = ({ tarea }) => {
     <div className={styles.taskCard}>
       <div className={styles.taskCardInfo}>
         <span className={styles.titulo}>
-          <p>
-            <b>Título: </b>
-            {tarea.titulo}
-          </p>
+          <b>Título: </b>
+          {tarea.titulo}
         </span>
         <span className={styles.descripcion}>
-          <p>
-            <b>Descripción: </b>
-            {tarea.descripcion}
-          </p>
+          <b>Descripción: </b>
+          {tarea.descripcion}
         </span>
         <span className={styles.fecha}>
-          <p>
-            <b>Fecha Límite: </b> {new Date(tarea.fechaLimite).toISOString()}
-          </p>
+          <b>Fecha Límite: </b>{" "}
+          {new Date(tarea.fechaLimite).toISOString().split("T")[0]}
         </span>
       </div>
       <div className={styles.taskCardButtons}>
-        <button onClick={taskToBacklog} className={styles.buttonSendBacklog}>
-          Enviar al Backlog
-        </button>
-        <button onClick={handleMoveTask} className={styles.setTask}>
-          {estadosTareas[tarea.estado] + " >>"}
-        </button>
-
-        <TaskEyeButton redirect={() => {}} />
-        <EditButton onClick={handleOpenModal} />
-        <DeleteButton handleDelete={deleteTask} />
+        <div className={styles.actionButtons}>
+          <TaskEyeButton redirect={() => {}} />
+          <EditButton onClick={handleOpenModal} />
+          <DeleteButton handleDelete={deleteTask} />
+        </div>
+        <div className={styles.backlogButtons}>
+          <button
+            onClick={submitTaskToBacklog}
+            className={styles.buttonSendBacklog}
+          >
+            Enviar al Backlog
+          </button>
+          <button onClick={handleMoveTask} className={styles.setTask}>
+            {estadosTareas[tarea.estado] + " >>"}
+          </button>
+        </div>
       </div>
 
       {isModalOpen && <TaskModal handleClose={handleOpenModal} />}

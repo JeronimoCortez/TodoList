@@ -67,6 +67,11 @@ export const TaskModal: FC<IPropsTask> = ({ handleClose }) => {
         <input
           type="date"
           placeholder="Fecha fin"
+          value={
+            task.fechaLimite
+              ? new Date(task.fechaLimite).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          }
           onChange={(e) =>
             setTask({ ...task, fechaLimite: new Date(e.target.value) })
           }

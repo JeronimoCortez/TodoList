@@ -38,8 +38,8 @@ const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
     <div className={styles.sprintCard}>
       <div className={styles.sprintCardHeader}>{sprint.nombre}</div>
       <div className={styles.sprintCardInfo}>
-        <div>Inicio: {new Date(sprint.inicio).toISOString()}</div>
-        <div>Fin: {new Date(sprint.fin).toISOString()} </div>
+        <div>Inicio: {new Date(sprint.inicio).toISOString().split("T")[0]}</div>
+        <div>Fin: {new Date(sprint.fin).toISOString().split("T")[0]} </div>
       </div>
       <div className={styles.sprintCardButtons}>
         <TaskEyeButton redirect={redirectToSprintView} />

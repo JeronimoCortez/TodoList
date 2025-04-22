@@ -49,6 +49,11 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose }) => {
         <input
           type="date"
           placeholder="Fecha inicio"
+          value={
+            sprint.inicio
+              ? new Date(sprint.inicio).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          }
           onChange={(e) =>
             setSprint({ ...sprint, inicio: new Date(e.target.value) })
           }
@@ -57,6 +62,11 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose }) => {
         <input
           type="date"
           placeholder="Fecha fin"
+          value={
+            sprint.fin
+              ? new Date(sprint.fin).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          }
           onChange={(e) =>
             setSprint({ ...sprint, fin: new Date(e.target.value) })
           }
