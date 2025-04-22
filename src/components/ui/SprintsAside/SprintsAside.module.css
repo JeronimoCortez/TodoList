@@ -9,8 +9,6 @@
   overflow-y: auto;
 }
 
-
-
 .buttonBacklog {
   all: unset;
   background-color: #fff;
@@ -55,9 +53,15 @@
   cursor: pointer;
 }
 
-
 .line {
   width: 80%;
   border: 1px solid #fff;
   margin: 2px auto;
+}
+
+.sprintCardContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }

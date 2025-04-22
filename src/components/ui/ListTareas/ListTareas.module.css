@@ -12,19 +12,24 @@
 .containerData {
   display: flex;
   align-items: center;
-  gap: .4rem;
+  gap: 1rem;
 }
 
 .containerButton {
   display: flex;
   align-items: center;
-  gap: .4rem;
+  gap: 0.4rem;
+}
+
+.titleContainer {
+  font-weight: 100;
 }
 
 .titulo,
 .descripcion,
 .fecha {
   font-size: 14px;
+  font-weight: bold;
 }
 
 .enviar {

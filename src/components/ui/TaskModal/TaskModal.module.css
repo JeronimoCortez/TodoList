@@ -11,6 +11,14 @@
   text-align: center;
 }
 
+.descripcionTask {
+  all: unset;
+  text-align: left;
+  height: 12vh;
+  resize: none;
+  color: #fff;
+}
+
 .inputs {
   background: #7484d3;
   padding: 0.8rem;

@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 interface IPropsTask {
   handleClose: VoidFunction;
   taskToEdit?: ITarea;
-  idSprint?: String;
+  idSprint?: string;
 }
 
 export const TaskModal: FC<IPropsTask> = ({
@@ -85,8 +85,7 @@ export const TaskModal: FC<IPropsTask> = ({
           onChange={(e) => setTask({ ...task, titulo: e.target.value })}
           className={styles.tituloTask}
         />
-        <input
-          type="string"
+        <textarea
           placeholder="Descripción:"
           value={task.descripcion}
           onChange={(e) => setTask({ ...task, descripcion: e.target.value })}

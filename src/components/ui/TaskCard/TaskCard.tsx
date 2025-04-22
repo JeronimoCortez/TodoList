@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 
 type IPropsITareaCard = {
   tarea: ITarea;
-  idSprint?: String;
+  idSprint?: string;
 };
 
 const TaskCard: FC<IPropsITareaCard> = ({ tarea, idSprint }) => {
@@ -60,34 +60,31 @@ const TaskCard: FC<IPropsITareaCard> = ({ tarea, idSprint }) => {
     <div className={styles.taskCard}>
       <div className={styles.taskCardInfo}>
         <span className={styles.titulo}>
-          <p>
-            <b>Título: </b>
-            {tarea.titulo}
-          </p>
+          <b>Título: </b>
+          {tarea.titulo}
         </span>
         <span className={styles.descripcion}>
-          <p>
-            <b>Descripción: </b>
-            {tarea.descripcion}
-          </p>
+          <b>Descripción: </b>
+          {tarea.descripcion}
         </span>
         <span className={styles.fecha}>
-          <p>
-            <b>Fecha Límite: </b> {new Date(tarea.fechaLimite).toISOString()}
-          </p>
+          <b>Fecha Límite: </b> {new Date(tarea.fechaLimite).toISOString()}
         </span>
       </div>
       <div className={styles.taskCardButtons}>
-        <button onClick={taskToBacklog} className={styles.buttonSendBacklog}>
-          Enviar al Backlog
-        </button>
-        <button onClick={handleMoveTask} className={styles.setTask}>
-          {estadosTareas[tarea.estado] + " >>"}
-        </button>
-
-        <TaskEyeButton redirect={() => {}} />
-        <EditButton onClick={handleOpenModal} />
-        <DeleteButton handleDelete={deleteTask} />
+        <div className={styles.actionButtons}>
+          <TaskEyeButton redirect={() => {}} />
+          <EditButton onClick={handleOpenModal} />
+          <DeleteButton handleDelete={deleteTask} />
+        </div>
+        <div className={styles.backlogButtons}>
+          <button onClick={taskToBacklog} className={styles.buttonSendBacklog}>
+            Enviar al Backlog
+          </button>
+          <button onClick={handleMoveTask} className={styles.setTask}>
+            {estadosTareas[tarea.estado] + " >>"}
+          </button>
+        </div>
       </div>
 
       {isModalOpen && (
