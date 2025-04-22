@@ -2,10 +2,10 @@
   "backlog": {
     "tasks": [
       {
-        "id": "2025-04-15T17:53:52.621Z",
-        "titulo": "Tarea 1",
-        "descripcion": "lorem lorem",
-        "fechaLimite": "2025-04-16T00:00:00.000Z",
+        "id": "2025-04-22T12:37:57.986Z",
+        "titulo": "tarea 1.1",
+        "descripcion": "1",
+        "fechaLimite": "2025-04-23T00:00:00.000Z",
         "estado": 0
       }
     ]
@@ -14,15 +14,15 @@
     "sprints": [
       {
         "id": "2025-04-14T17:21:53.876Z",
-        "nombre": "Sprint 1",
-        "inicio": "2025-04-14T00:00:00.000Z",
-        "fin": "2025-04-21T00:00:00.000Z",
+        "nombre": "Sprint 1.3",
+        "inicio": "2025-04-23T00:00:00.000Z",
+        "fin": "2025-04-23T00:00:00.000Z",
         "tasks": [
           {
-            "id": "2025-04-15T19:40:38.581Z",
-            "titulo": "Tarea 1.1",
+            "id": "2025-04-22T16:10:15.188Z",
+            "titulo": "Tarea 2.3",
             "descripcion": "lorem lorem",
-            "fechaLimite": "2025-04-16T00:00:00.000Z",
+            "fechaLimite": "2025-04-23T00:00:00.000Z",
             "estado": 0
           }
         ]

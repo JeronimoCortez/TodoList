@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { ITarea } from "../../../types/ITarea";
 import ListTareas from "../ListTareas/ListTareas";
 import styles from "./Backlog.module.css";
 import { TaskModal } from "../TaskModal/TaskModal";
 
-import { getBacklogController } from "../../../data/backlogController";
+import useTarea from "../../../hooks/useTarea";
 
 const Backlog = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [tareas, setTareas] = useState<ITarea[]>();
-
-  const getTareas = async () => {
-    const tareasBacklog = await getBacklogController();
-    setTareas(tareasBacklog);
-  };
+  const { getTareas, tareas } = useTarea();
 
   useEffect(() => {
     getTareas();
@@ -21,13 +15,15 @@ const Backlog = () => {
 
   return (
     <div className={styles.containerBacklog}>
-      <h2 className={styles.title}>Backlog</h2>
-      <button
-        className={styles.buttonTask}
-        onClick={() => setIsOpenModal(true)}
-      >
-        Crear nueva tarea <img src="./list.svg" alt="" />
-      </button>
+      <div className={styles.containerTitleButton}>
+        <h2 className={styles.title}>Backlog</h2>
+        <button
+          className={styles.buttonTask}
+          onClick={() => setIsOpenModal(true)}
+        >
+          Crear nueva tarea <img src="./list.svg" alt="" />
+        </button>
+      </div>
 
       {tareas?.map((tarea) => (
         <ListTareas key={tarea.id} tarea={tarea} />

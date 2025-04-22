@@ -3,7 +3,6 @@ import { ITarea } from "../types/ITarea"
 import { API_URL } from "../utils/constantes"
 import { getSprintByIdController, getSprintsController, updateSprintController } from "./todoListController"
 import { putBacklog, putTodoList } from "../http/todoList"
-import { ISprint } from "../types/ISprint"
 
 export const getBacklogController = async (): Promise<ITarea[] | undefined> => {
   try {

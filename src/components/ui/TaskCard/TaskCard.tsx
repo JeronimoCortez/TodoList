@@ -12,48 +12,48 @@ import {
 import { estadosTareas } from "../../../enum/estadosTareas";
 import { TaskModal } from "../TaskModal/TaskModal";
 import Swal from "sweetalert2";
+import { taskStore } from "../../../store/taskStore";
+import useSprint from "../../../hooks/useSprint";
+import { sprintStore } from "../../../store/sprintStore";
 
 type IPropsITareaCard = {
   tarea: ITarea;
-  idSprint?: String;
 };
 
-const TaskCard: FC<IPropsITareaCard> = ({ tarea, idSprint }) => {
+const TaskCard: FC<IPropsITareaCard> = ({ tarea }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const setTareaActiva = taskStore((state) => state.setTareaActiva);
+  const { tareaActiva } = taskStore();
+  const { deleteTaskToSprint } = useSprint();
+  const { sprintActivo } = sprintStore();
 
   const handleOpenModal = () => {
+    if (tareaActiva) {
+      setTareaActiva(null);
+    } else {
+      setTareaActiva(tarea);
+    }
     setIsModalOpen(!isModalOpen);
   };
 
   const taskToBacklog = async () => {
-    await postTaskSprintToBacklog(tarea, String(idSprint));
+    await postTaskSprintToBacklog(tarea, String(sprintActivo?.id));
   };
 
   const handleMoveTask = async () => {
     const nuevoEstado = tarea.estado + 1 < 2 ? tarea.estado + 1 : 2;
     const tareaActualizada: ITarea = { ...tarea, estado: nuevoEstado };
-    await updateTaskBySprintController(String(idSprint), tareaActualizada);
+    await updateTaskBySprintController(
+      String(sprintActivo?.id),
+      tareaActualizada
+    );
   };
 
   const deleteTask = async () => {
-    Swal.fire({
-      title: "¿Seguro que quieres eliminar la tarea?",
-      text: "Los cambios son irreversibles",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteTaskSprint(tarea.id, String(idSprint));
-        Swal.fire({
-          title: "Tarea eliminada!",
-          text: "La tarea se elimino con exito!",
-          icon: "success",
-        });
-      }
-    });
+    if (sprintActivo) {
+      deleteTaskToSprint(tarea.id, sprintActivo.id);
+      console.log(sprintActivo);
+    }
   };
 
   return (
@@ -90,13 +90,7 @@ const TaskCard: FC<IPropsITareaCard> = ({ tarea, idSprint }) => {
         <DeleteButton handleDelete={deleteTask} />
       </div>
 
-      {isModalOpen && (
-        <TaskModal
-          handleClose={handleOpenModal}
-          taskToEdit={tarea}
-          idSprint={idSprint}
-        />
-      )}
+      {isModalOpen && <TaskModal handleClose={handleOpenModal} />}
     </div>
   );
 };

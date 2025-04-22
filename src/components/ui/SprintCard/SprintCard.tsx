@@ -5,9 +5,9 @@ import EditButton from "../EditButton/EditButton";
 import TaskEyeButton from "../TaskEyeButton/TaskEyeButton";
 import styles from "./SprintCard.module.css";
 import SprintModal from "../SprintModal/SprintModal";
-import Swal from "sweetalert2";
-import { deleteSprintController } from "../../../data/todoListController";
 import { useNavigate } from "react-router-dom";
+import { sprintStore } from "../../../store/sprintStore";
+import useSprint from "../../../hooks/useSprint";
 
 type IPropsSprintCard = {
   sprint: ISprint;
@@ -15,35 +15,23 @@ type IPropsSprintCard = {
 
 const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
   const [openModal, setOpenModal] = useState(false);
+  const setSprintActivo = sprintStore((state) => state.setSprintActivo);
+  const { sprintActivo } = sprintStore();
+  const { deleteSprint } = useSprint();
   const navigate = useNavigate();
 
   const handleOpenCloseModal = () => {
+    if (sprintActivo) {
+      setSprintActivo(null);
+    } else {
+      setSprintActivo(sprint);
+    }
     setOpenModal(!openModal);
   };
 
   const redirectToSprintView = () => {
+    setSprintActivo(sprint);
     navigate(`/sprint/${sprint.id}`);
-  };
-
-  const deleteSprint = async () => {
-    Swal.fire({
-      title: "¿Seguro que quieres eliminar el sprint?",
-      text: "Los cambios son irreversibles",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteSprintController(sprint.id);
-        Swal.fire({
-          title: "Sprint eliminado!",
-          text: "El sprint se elimino con exito!",
-          icon: "success",
-        });
-      }
-    });
   };
 
   return (
@@ -56,11 +44,9 @@ const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
       <div className={styles.sprintCardButtons}>
         <TaskEyeButton redirect={redirectToSprintView} />
         <EditButton onClick={handleOpenCloseModal} />
-        <DeleteButton handleDelete={deleteSprint} />
+        <DeleteButton handleDelete={() => deleteSprint(sprint.id)} />
       </div>
-      {openModal && (
-        <SprintModal handleClose={handleOpenCloseModal} sprintToEdit={sprint} />
-      )}
+      {openModal && <SprintModal handleClose={handleOpenCloseModal} />}
     </div>
   );
 };

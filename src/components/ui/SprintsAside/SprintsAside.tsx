@@ -1,30 +1,26 @@
 import { useEffect, useState } from "react";
-import { ISprint } from "../../../types/ISprint";
 import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
-import { getSprintsController } from "../../../data/todoListController";
 import SprintModal from "../SprintModal/SprintModal";
 import { useNavigate } from "react-router-dom";
+import useSprint from "../../../hooks/useSprint";
+import { sprintStore } from "../../../store/sprintStore";
 
 const SprintsAside = () => {
   const navigate = useNavigate();
-
   const [isOpen, setOpen] = useState(false);
-  const [sprints, setSprints] = useState<ISprint[]>([]);
+  const { getSprints, sprints } = useSprint();
+  const { setSprintActivo } = sprintStore();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const getSprints = async () => {
-    const sprints = await getSprintsController();
-    if (sprints) setSprints(sprints);
-  };
 
   useEffect(() => {
     getSprints();
   }, []);
 
   const handleNavigateToBacklog = () => {
+    setSprintActivo(null);
     navigate("/");
   };
 

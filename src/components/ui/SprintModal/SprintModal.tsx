@@ -3,20 +3,19 @@ import { ISprint } from "../../../types/ISprint";
 import styles from "./SprintModal.module.css";
 import CloseButton from "../CloseButton/CloseButton";
 import AcceptButton from "../AcceptButton/AcceptButton";
-import {
-  createSprintController,
-  updateSprintController,
-} from "../../../data/todoListController";
-import Swal from "sweetalert2";
+import { sprintStore } from "../../../store/sprintStore";
+import useSprint from "../../../hooks/useSprint";
 
 interface IPropsSprint {
   handleClose: () => void;
-  sprintToEdit?: ISprint;
 }
 
-const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
-  const initialValues: ISprint = sprintToEdit
-    ? sprintToEdit
+const SprintModal: FC<IPropsSprint> = ({ handleClose }) => {
+  const { sprintActivo } = sprintStore();
+  const { createSprint, updateSprint } = useSprint();
+
+  const initialValues: ISprint = sprintActivo
+    ? sprintActivo
     : {
         id: new Date().toISOString(),
         nombre: "",
@@ -26,34 +25,19 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
       };
   const [sprint, setSprint] = useState<ISprint>(initialValues);
 
-  const createSprint = async () => {
-    setSprint({ ...sprint });
-    await createSprintController(sprint);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "El sprint se creo correctamente",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    handleClose();
-  };
-  const updateSprint = async () => {
-    await updateSprintController(sprint);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "El sprint se actualizo correctamente",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  const submitForm = () => {
+    if (sprintActivo) {
+      updateSprint(sprint);
+    } else {
+      createSprint(sprint);
+    }
     handleClose();
   };
 
   return (
     <div className={styles.containerSprintModal}>
       <form className={styles.inputs}>
-        <h2>{sprintToEdit ? "Editar Sprint" : "Crear Sprint"}</h2>
+        <h2>{sprintActivo ? "Editar Sprint" : "Crear Sprint"}</h2>
 
         <input
           type="text"
@@ -80,9 +64,7 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintToEdit }) => {
         />
 
         <div className={styles.buttons}>
-          <AcceptButton
-            onClick={() => (sprintToEdit ? updateSprint() : createSprint())}
-          />
+          <AcceptButton onClick={submitForm} />
           <CloseButton handleClose={handleClose} />
         </div>
       </form>
