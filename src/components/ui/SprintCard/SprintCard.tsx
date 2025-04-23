@@ -5,7 +5,7 @@ import EditButton from "../EditButton/EditButton";
 import TaskEyeButton from "../TaskEyeButton/TaskEyeButton";
 import styles from "./SprintCard.module.css";
 import SprintModal from "../SprintModal/SprintModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { sprintStore } from "../../../store/sprintStore";
 import useSprint from "../../../hooks/useSprint";
 
@@ -14,6 +14,7 @@ type IPropsSprintCard = {
 };
 
 const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
+  const { id } = useParams();
   const [openModal, setOpenModal] = useState(false);
   const setSprintActivo = sprintStore((state) => state.setSprintActivo);
   const { sprintActivo } = sprintStore();
@@ -21,7 +22,7 @@ const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
   const navigate = useNavigate();
 
   const handleOpenCloseModal = () => {
-    if (sprintActivo) {
+    if (sprintActivo && !id) {
       setSprintActivo(null);
     } else {
       setSprintActivo(sprint);
@@ -46,7 +47,9 @@ const SprintCard: FC<IPropsSprintCard> = ({ sprint }) => {
         <EditButton onClick={handleOpenCloseModal} />
         <DeleteButton handleDelete={() => deleteSprint(sprint.id)} />
       </div>
-      {openModal && <SprintModal handleClose={handleOpenCloseModal} />}
+      {openModal && (
+        <SprintModal handleClose={handleOpenCloseModal} sprintEntry={sprint} />
+      )}
     </div>
   );
 };

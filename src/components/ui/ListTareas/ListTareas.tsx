@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import styles from "./ListTareas.module.css";
 import { ITarea } from "../../../types/ITarea";
-import TaskEyeButton from "../TaskEyeButton/TaskEyeButton";
 import EditButton from "../EditButton/EditButton";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import { SendButton } from "../SendButton/SendButton";
@@ -71,7 +70,6 @@ const ListTareas: FC<IPropsITarea> = ({ tarea }) => {
             </select>
           </div>
           <div className={styles.acciones}>
-            <TaskEyeButton redirect={() => {}} />
             <EditButton onClick={handleChangeModal} />
             <DeleteButton handleDelete={() => deleteTarea(tarea.id)} />
           </div>

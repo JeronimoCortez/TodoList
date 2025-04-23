@@ -29,6 +29,10 @@ const Backlog = () => {
         <ListTareas key={tarea.id} tarea={tarea} />
       ))}
 
+      {tareas.length === 0 && (
+        <h4 className={styles.noTareas}>No hay tareas para mostrar</h4>
+      )}
+
       {isOpenModal && <TaskModal handleClose={() => setIsOpenModal(false)} />}
     </div>
   );

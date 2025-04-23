@@ -1,14 +1,16 @@
 .containerBacklog {
   width: 70vw;
   margin: 0.8rem;
-  background-image: url("./bgTptodoList.jpeg");
+  /* background-image: url("./bgTptodoList.jpeg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   height: 80vh;
   width: 100%;
   border-radius: 2rem;
   padding: 0.4rem;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .containerTitleButton {
@@ -45,4 +47,10 @@
   justify-content: space-between;
   width: 20vw;
   margin: 0 auto;
+}
+
+.noTareas {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 24px;
 }

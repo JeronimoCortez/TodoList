@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Sprint.module.css";
 import TaskCard from "../TaskCard/TaskCard";
 import { estadosTareas } from "../../../enum/estadosTareas";
 import { TaskModal } from "../TaskModal/TaskModal";
 import { sprintStore } from "../../../store/sprintStore";
+import { useParams } from "react-router-dom";
+import { getSprintByIdController } from "../../../data/todoListController";
 
 const Sprint = () => {
+  const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { sprintActivo } = sprintStore();
+  const setSprintActivo = sprintStore((state) => state.setSprintActivo);
+
+  useEffect(() => {
+    if (id) {
+      const fetchSprint = async () => {
+        const sprintById = await getSprintByIdController(id);
+        if (sprintById) {
+          setSprintActivo(sprintById);
+        }
+      };
+
+      fetchSprint();
+    }
+  }, [id]);
 
   const handleChangeModal = () => {
     setIsModalOpen(!isModalOpen);

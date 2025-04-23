@@ -8,14 +8,15 @@ import useSprint from "../../../hooks/useSprint";
 
 interface IPropsSprint {
   handleClose: () => void;
+  sprintEntry?: ISprint;
 }
 
-const SprintModal: FC<IPropsSprint> = ({ handleClose }) => {
+const SprintModal: FC<IPropsSprint> = ({ handleClose, sprintEntry }) => {
   const { sprintActivo } = sprintStore();
   const { createSprint, updateSprint } = useSprint();
 
-  const initialValues: ISprint = sprintActivo
-    ? sprintActivo
+  const initialValues: ISprint = sprintEntry
+    ? sprintEntry
     : {
         id: new Date().toISOString(),
         nombre: "",
@@ -37,7 +38,7 @@ const SprintModal: FC<IPropsSprint> = ({ handleClose }) => {
   return (
     <div className={styles.containerSprintModal}>
       <form className={styles.inputs}>
-        <h2>{sprintActivo ? "Editar Sprint" : "Crear Sprint"}</h2>
+        <h2>{sprintEntry ? "Editar Sprint" : "Crear Sprint"}</h2>
 
         <input
           type="text"
