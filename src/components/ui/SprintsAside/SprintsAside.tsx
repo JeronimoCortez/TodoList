@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SprintCard from "../SprintCard/SprintCard";
 import styles from "./SprintsAside.module.css";
 import SprintModal from "../SprintModal/SprintModal";
@@ -9,7 +9,7 @@ import { sprintStore } from "../../../store/sprintStore";
 const SprintsAside = () => {
   const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
-  const { sprints } = useSprint();
+  const { getSprints, sprints } = useSprint();
   const { setSprintActivo } = sprintStore();
 
   const handleOpen = () => setOpen(true);
@@ -19,6 +19,10 @@ const SprintsAside = () => {
     setSprintActivo(null);
     navigate("/");
   };
+
+  useEffect(() => {
+    getSprints();
+  }, []);
 
   return (
     <div className={styles.containerAside}>
