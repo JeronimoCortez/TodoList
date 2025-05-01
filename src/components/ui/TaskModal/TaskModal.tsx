@@ -40,6 +40,7 @@ export const TaskModal: FC<IPropsTask> = ({ handleClose }) => {
       if (sprintActivo) {
         createTaskSprint(task, sprintActivo.id);
       } else {
+        console.log(task);
         createTarea(task);
       }
     }
@@ -73,7 +74,10 @@ export const TaskModal: FC<IPropsTask> = ({ handleClose }) => {
               : new Date().toISOString().split("T")[0]
           }
           onChange={(e) =>
-            setTask({ ...task, fechaLimite: new Date(e.target.value) })
+            setTask({
+              ...task,
+              fechaLimite: new Date(e.target.value),
+            })
           }
           className={styles.finTask}
         />

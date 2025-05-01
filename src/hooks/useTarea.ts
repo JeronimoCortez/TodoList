@@ -2,7 +2,8 @@ import { useShallow } from "zustand/shallow";
 import { ITarea } from "../types/ITarea";
 import Swal from "sweetalert2";
 import { taskStore } from "../store/taskStore";
-import { createTaskToBacklog, deleteTaskBacklog, getBacklogController, postTaskBacklogToSprint, updateTaskBacklogController } from "../data/backlogController";
+import { BacklogService } from "../services/BacklogService";
+import { TaskService } from "../services/TaskService";
 
 const useTarea = () => {
   const {
@@ -20,8 +21,12 @@ const useTarea = () => {
       editarTarea: state.editarTarea,
     }))
   );
+
+  const backlogService = new BacklogService();
+  const taskService = new TaskService();
+
   const getTareas = async () => {
-    const data = await getBacklogController();
+    const data = await backlogService.getTareasBacklog();
     console.log("Tareas: " + data);
     if (data) setArrayTareas(data);
   };
@@ -29,7 +34,8 @@ const useTarea = () => {
   const createTarea = async (nuevaTarea: ITarea) => {
     agregarNuevaTarea(nuevaTarea);
     try {
-      await createTaskToBacklog(nuevaTarea);
+      await taskService.createTarea(nuevaTarea);
+      await backlogService.addTaskBacklog(nuevaTarea.id);
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
       eliminarTarea(nuevaTarea.id!);
@@ -41,7 +47,7 @@ const useTarea = () => {
     const estadoPrevio = tareas.find((el) => el.id === tareaActualizada.id);
     editarTarea(tareaActualizada);
     try {
-      await updateTaskBacklogController(tareaActualizada);
+      await taskService.updateTarea(tareaActualizada.id, tareaActualizada);
       Swal.fire("Éxito", "Tarea actualizada correctamente", "success");
     } catch (err) {
       if (estadoPrevio) {
@@ -64,7 +70,8 @@ const useTarea = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      await deleteTaskBacklog(idTarea);
+      // await deleteTaskBacklog(idTarea);
+      await taskService.deleteTarea(idTarea);
       eliminarTarea(idTarea);
       Swal.fire("Eliminado", "Tarea eliminada correctamente", "success");
     } catch (error) {
@@ -84,14 +91,15 @@ const useTarea = () => {
     });
     if (!confirm.isConfirmed) return;
     try {
-      await postTaskBacklogToSprint(tarea, idSprint)
+      // await postTaskBacklogToSprint(tarea, idSprint);
+      await backlogService.taskToSprint(tarea.id, idSprint);
       eliminarTarea(tarea.id);
       Swal.fire("Eliminado", "Tarea enviada correctamente", "success");
     } catch (error) {
       if (estadoPrevio) createTarea(estadoPrevio);
       console.log("Error al enviar tarea");
     }
-  }
+  };
 
   return {
     getTareas,

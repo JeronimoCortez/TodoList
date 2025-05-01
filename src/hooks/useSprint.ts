@@ -1,20 +1,11 @@
 import { useShallow } from "zustand/shallow";
 import { sprintStore } from "../store/sprintStore";
-import {
-  createSprintController,
-  deleteSprintController,
-  getSprintsController,
-  updateSprintController,
-} from "../data/todoListController";
+
 import { ISprint } from "../types/ISprint";
 import Swal from "sweetalert2";
 import { ITarea } from "../types/ITarea";
-import {
-  createTaskToSprint,
-  deleteTaskSprint,
-  postTaskSprintToBacklog,
-  updateTaskBySprintController,
-} from "../data/backlogController";
+import { SprintService } from "../services/SprintService";
+import { TaskService } from "../services/TaskService";
 
 const useSprint = () => {
   const {
@@ -35,8 +26,11 @@ const useSprint = () => {
     }))
   );
 
+  const sprintService = new SprintService();
+  const taskService = new TaskService();
+
   const getSprints = async () => {
-    const data = await getSprintsController();
+    const data = await sprintService.getSprints();
     console.log("Data: ", data);
     if (data) setArraySprint(data);
   };
@@ -45,7 +39,7 @@ const useSprint = () => {
     agregarNuevoSprint(nuevoSprint);
 
     try {
-      await createSprintController(nuevoSprint);
+      await sprintService.createSprint(nuevoSprint);
       Swal.fire("Éxito", "Sprint creado correctamente", "success");
     } catch (error) {
       eliminarSprint(nuevoSprint.id!);
@@ -58,7 +52,7 @@ const useSprint = () => {
     editarSprint(sprintActualizado);
 
     try {
-      await updateSprintController(sprintActualizado);
+      await sprintService.updateSprint(sprintActualizado);
       Swal.fire("Éxito", "Sprint actualizado correctamente", "success");
     } catch (error) {
       if (estadoPrevio) {
@@ -81,7 +75,8 @@ const useSprint = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      await deleteSprintController(idSprint);
+      // await deleteSprintController(idSprint);
+      await sprintService.deleteSprint(idSprint);
       eliminarSprint(idSprint);
       Swal.fire("Eliminado", "Sprint eliminado correctamente", "success");
     } catch (error) {
@@ -98,7 +93,9 @@ const useSprint = () => {
         console.log(sprintDb.tasks);
         editarSprint(sprintDb);
         setSprintActivo(sprintDb);
-        await createTaskToSprint(tarea, idSprint);
+        // await createTaskToSprint(tarea, idSprint);
+        await taskService.createTarea(tarea);
+        await sprintService.createTaskToSprint(idSprint, tarea.id);
       }
       Swal.fire("Éxito", "Tarea creada correctamente", "success");
     } catch (error) {
@@ -116,8 +113,8 @@ const useSprint = () => {
       const sprintActualizado = { ...sprint, tasks: tareasActualizadas };
       setSprintActivo(sprintActualizado);
       editarSprint(sprintActualizado);
-      await updateTaskBySprintController(idSprint, tareaEditada);
-
+      await taskService.updateTarea(tareaEditada.id, tareaEditada);
+      await sprintService.updateSprint(sprintActualizado);
       Swal.fire("Éxito", "Tarea actualizada correctamente", "success");
     } catch (error) {
       console.error("Error al editar tarea: ", error);
@@ -145,8 +142,8 @@ const useSprint = () => {
       const sprintActualizado = { ...sprint, tasks: tareasActualizadas };
       setSprintActivo(sprintActualizado);
       editarSprint(sprintActualizado);
-      await deleteTaskSprint(idTarea, idSprint);
-
+      await taskService.deleteTarea(idTarea);
+      await sprintService.updateSprint(sprintActualizado);
       Swal.fire("Éxito", "Tarea eliminada correctamente", "success");
     } catch (error) {
       console.error("Error al eliminar tarea: ", error);
@@ -173,8 +170,8 @@ const useSprint = () => {
 
         editarSprint(sprintActualizado);
       }
-
-      await postTaskSprintToBacklog(tarea, idSprint);
+      // await postTaskSprintToBacklog(tarea, idSprint);
+      await sprintService.taskToBacklog(idSprint, tarea.id);
 
       Swal.fire("Eliminado", "Tarea enviada correctamente", "success");
     } catch (error) {

@@ -8,7 +8,6 @@ import useTarea from "../../../hooks/useTarea";
 const Backlog = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { getTareas, tareas } = useTarea();
-
   useEffect(() => {
     getTareas();
   }, []);
